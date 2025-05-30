@@ -1,0 +1,14 @@
+editdistance==0.8.1
+emoji==1.7.0
+matplotlib==3.8.4
+minicons==0.3.31
+nltk==3.8.1
+numpy
+pandas
+spacy-alignments==0.9.1
+stanza==1.8.1
+statsmodels==0.14.2
+tokenizers
+torch==2.6.0
+tqdm==4.67.1
+transformers
