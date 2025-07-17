@@ -33,7 +33,7 @@ def process_batches(sentences, model, llm_type, batch_size):
     return log_probs
 
 
-def evaluate_llm(model, llm_type, minimal_pairs, batch_size=10):
+def evaluate_llm(model, llm_type, minimal_pairs, batch_size=2):
     observed_sentences = [mp["observed_sentence"] for mp in minimal_pairs]
     manipulated_sentences = [mp["manipulated_sentence"] for mp in minimal_pairs]
 
@@ -78,7 +78,7 @@ def run_evaluation(models, llm_type, scorer_class, lang):
             for real, manipulated in zip(observed_log_probs, manipulated_log_probs)
         ]
         accuracy = sum(scores) / len(scores)
-        print(f"{save_name} ({lang}): Accuracy = {accuracy:.2%}%")
+        print(f"{save_name} ({lang}): Accuracy = {accuracy:.1%}")
 
     if "model" in locals():
         del model
