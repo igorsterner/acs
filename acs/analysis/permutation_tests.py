@@ -56,8 +56,8 @@ def main():
         lang_dir = os.path.join(DATA_DIR, lang)
 
         for lm in args.lms:
-            lm_file = lang_dir / f"{lm}.jsonl"
-            if not lm_file.exists():
+            lm_file = os.path.join(lang_dir, f"{lm}.jsonl")
+            if not os.path.exists(lm_file):
                 print(f"File not found: {lm_file}")
                 continue
             scores = load_scores_jsonl(lm_file)
@@ -92,7 +92,7 @@ def main():
         print("\nMeans for each system:")
         for system in systems:
             avg = np.mean(all_scores[system])
-            print(f"{system}: {avg*100:.2f}")
+            print(f"{system}: {avg:.1%}")
 
 
 if __name__ == "__main__":
