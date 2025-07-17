@@ -7,15 +7,11 @@ We have also make available a large corpus of code-switching: [https://huggingfa
 
 # Generate minimal pairs of code-switching
 
+Follow these steps to generate minimal pairs locally, or try them out online [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/igorsterner/acs/blob/main/run.ipynb)
+
+
 ## Environment
 
-Make sure you have python installed (we used version 3.11.8) and the required dependencies.
-
-```
-conda create -n myenv python=3.11.8
-conda activate myenv
-pip install -r requirements.txt
-```
 
 Clone this repository and make sure the python path is set appropriately.
 
@@ -25,13 +21,21 @@ cd acs
 export PYTHONPATH=$(pwd):$PYTHONPATH
 ```
 
+Make sure you have python installed (we used version 3.11.8) and the required dependencies.
+
+```
+conda create -n myenv python=3.11.8
+conda activate myenv
+pip install -r requirements.txt
+```
+
 ## Input format
 
 As input, we used raw twitter text. We assume it is provided in JSON-line format, with each line including an "id" field and a "text" field (see e.g. `data/demonstration_example/de-en.jsonl`).
 
 ## Tools
 
-Lots of tools are required for preprocessing. Run them all with in the following style (note that English is always the second language in our setup, as the token-based language identification model assumes that)
+Lots of tools are required for preprocessing. Run them all with in the following style (note that English is always the second language in our setup, as the token-based language identification model assumes that).
 
 ```
 python acs/minimal_pairs/processing.py --lang1 de --lang2 en
@@ -51,27 +55,27 @@ python acs/minimal_pairs/minimal_pairs.py
 For the provided example, the output is either:
 
 ```
-> @USER And I said maybe etwas leiser singen, sonst ruf ich die Polizei
-> @USER And I said maybe a little leiser singen, sonst ruf ich die Polizei
+>  @USER And I said maybe etwas leiser singen, sonst ruf ich die Polizei
+> *@USER And I said maybe a little leiser singen, sonst ruf ich die Polizei
 ```
 
 or 
 
 ```
-> @USER And I said maybe etwas leiser singen, sonst ruf ich die Polizei
-> @USER And I said vielleicht etwas leiser singen, sonst ruf ich die Polizei
+>  @USER And I said maybe etwas leiser singen, sonst ruf ich die Polizei
+> *@USER And I said vielleicht etwas leiser singen, sonst ruf ich die Polizei
 ```
 
 Add the remove_chinese_space flag for Chinese--English text.
 
-By default, the above will use pre-computed lists of borrowings and multi-word expressions. These lists can be re-computed using the `acs/minimal_pairs/tools/get_wiktionary_borrowings.py` and `acs/minimal_pairs/tools/get_urbandictionary_mwes.py` scripts.
+By default, the above will use pre-computed lists of borrowings and multi-word expressions. These lists can be re-computed with the latest available data using the `acs/minimal_pairs/tools/get_wiktionary_borrowings.py` and `acs/minimal_pairs/tools/get_urbandictionary_mwes.py` scripts.
 
 # Evaluate LLMs on the benchmark
 
 You can evaluate the LLMs on the benchmark in the following style:
 
 ```
-python acs/analysis/llms.py --langs de-en --incremental_lms meta-llama/Llama-3.1-8B --masked_lms FacebookAI/xlm-roberta-large
+python acs/analysis/llms.py --langs de-en --incremental_lms utter-project/EuroLLM-1.7B --masked_lms FacebookAI/xlm-roberta-large
 ```
 
 (any of the three arguments can be a space separated list)
@@ -79,7 +83,7 @@ python acs/analysis/llms.py --langs de-en --incremental_lms meta-llama/Llama-3.1
 Log-probabilities for each sentence in each minimal pair is saved by default in `data/results`. For the paired permutation-based significance tests, run them in the following style:
 
 ```
-python acs/analysis/permutation_tests.py --langs de-en --lms bloom-560m xlm-roberta-large xlm-roberta-base
+python acs/analysis/permutation_tests.py --langs de-en --lms EuroLLM-1.7B xlm-roberta-large
 ```
 
 # Human judgments
