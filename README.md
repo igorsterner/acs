@@ -27,7 +27,7 @@ export PYTHONPATH=$(pwd):$PYTHONPATH
 
 ## Input format
 
-As input, we used raw twitter text. We assume it is provided in JSON-line format, with each line including a "text" field (see e.g. `data/demonstration_example/de-en.jsonl`).
+As input, we used raw twitter text. We assume it is provided in JSON-line format, with each line including an "id" field and a "text" field (see e.g. `data/demonstration_example/de-en.jsonl`).
 
 ## Tools
 
@@ -64,6 +64,8 @@ or
 
 Add the remove_chinese_space flag for Chinese--English text.
 
+By default, the above will use pre-computed lists of borrowings and multi-word expressions. These lists can be re-computed using the `acs/minimal_pairs/tools/get_wiktionary_borrowings.py` and `acs/minimal_pairs/tools/get_urbandictionary_mwes.py` scripts.
+
 # Evaluate LLMs on the benchmark
 
 You can evaluate the LLMs on the benchmark in the following style:
@@ -96,10 +98,10 @@ The process is described in the following publication:
 @inproceedings{sterner-2025-acs,
       author = {Igor Sterner and Simone Teufel},
       title = {Minimal Pair-Based Evaluation of Code-Switching},
-    booktitle = "Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics",
-    month = jul,
-    year = "2025",
-    address = "Vienna, Austria",
-    publisher = "Association for Computational Linguistics",
+      booktitle = "Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics",
+      month = jul,
+      year = "2025",
+      address = "Vienna, Austria",
+      publisher = "Association for Computational Linguistics",
 }
 ```
