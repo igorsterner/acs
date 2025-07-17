@@ -4,7 +4,6 @@ import re
 from collections import Counter, defaultdict
 
 from nltk.tokenize.treebank import TreebankWordDetokenizer
-from tqdm import tqdm
 
 
 class CSMinimalPairs:
@@ -502,7 +501,7 @@ def make_minimal_pairs(
 
     CSMP = CSMinimalPairs(remove_chinese_space=remove_chinese_space)
 
-    for data in tqdm(processed_data, desc="Making minimal pairs"):
+    for data in processed_data:
         CSMP.make_minimal_pair(data)
 
     output_data = CSMP.all_resulting_minimal_pairs
