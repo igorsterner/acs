@@ -21,7 +21,7 @@ By default, `data` will be a `datasets.arrow_dataset.Dataset` object. But with `
 
 You can change `igorsterner/acs-benchmark` to `igorsterner/acs-corpus` for the corpus, `de-en` to any of the other language pairs, and for `de-en` there are also `validation` and `train` splits.
 
-Any problems, or you just want text files to start with, drop me an email at firstnamelastnamedotgmaildotcom.
+Any problems, or you just want text files to start with, drop me an email at firstnamelastnameatgmaildotcom.
 
 # Generate minimal pairs of code-switching
 
