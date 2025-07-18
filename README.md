@@ -4,6 +4,24 @@ The ACS benchmark of minimal pairs of code-switching sentences is available on h
 
 We have also make available a large corpus of code-switching: [https://huggingface.co/datasets/igorsterner/acs-corpus](https://huggingface.co/datasets/igorsterner/acs-corpus). The identifiers from the benchmark match up to entries in this corpus. So look here if you want automatic translations, parse trees, alignments or full source tweets for the observed data in the benchmark.
 
+You will need to login to a huggingface account in order to access the data, but all access requests are automatically approved. To load the data, make sure you have `datasets` and peripheries installed
+
+```
+pip install -U datasets huggingface_hub fsspec
+```
+
+Then load the data as follows.
+
+```python
+from datasets import load_dataset
+data = load_dataset("igorsterner/acs-benchmark", data_dir="de-en", split="test")
+```
+
+By default, `data` will be a `datasets.arrow_dataset.Dataset` object. But with `list(data)` it becomes a native python list of dictionaries, each dictionary has keys `id`, `observed_sentence`, `manipulated_sentence`, `observed_tokens`, `manipulated_tokens`, `observed_langs`, and `manipulated_langs`. 
+
+You can change `igorsterner/acs-benchmark` to `igorsterner/acs-corpus` for the corpus, `de-en` to any of the other language pairs, and for `de-en` there are also `validation` and `train` splits.
+
+Any problems, or you just want text files to start with, drop me an email at firstnamelastnamedotgmaildotcom.
 
 # Generate minimal pairs of code-switching
 
