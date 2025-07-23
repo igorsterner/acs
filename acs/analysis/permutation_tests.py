@@ -41,7 +41,7 @@ def load_scores_jsonl(filepath):
             observed = item.get("observed_logprob")
             manipulated = item.get("manipulated_logprob")
             if observed is not None and manipulated is not None:
-                scores.append(1 if observed > manipulated else 0)
+                scores.append(1 if observed < manipulated else 0)
     return scores
 
 
